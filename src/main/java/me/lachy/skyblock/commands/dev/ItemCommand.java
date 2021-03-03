@@ -23,7 +23,7 @@ public class ItemCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
 
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command!");
+            sender.sendMessage(Skyblock.notPlayer);
             return false;
         } else {
             Player player = (Player) sender;
@@ -31,10 +31,10 @@ public class ItemCommand implements CommandExecutor {
                 ItemStack item = new GrapplingHook().getItem();
 
                 player.getInventory().addItem(item);
-                player.sendMessage(util.devPrefix + "§aYou were given a GRAPPLING_HOOK");
+                player.sendMessage(Skyblock.devPrefix + "§fYou were given a GRAPPLING_HOOK");
                 return true;
             } else {
-                player.sendMessage("§cYou do not have permission to use that command.");
+                player.sendMessage(Skyblock.noPerms);
                 return false;
             }
         }
