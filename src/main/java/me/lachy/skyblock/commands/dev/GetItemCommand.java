@@ -30,11 +30,8 @@ public class GetItemCommand implements CommandExecutor {
         } else {
             Player player = (Player) sender;
             if (player.isOp()) {
-                ItemStack item = new GrapplingHook();
-                item.setType(Material.FISHING_ROD);
-                ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName("§aGrappling Hook");
-                item.setItemMeta(meta);
+                ItemStack item = new GrapplingHook().getItem();
+
                 player.getInventory().addItem(item);
                 player.sendMessage(util.devPrefix + "§aYou were given a " + new GrapplingHook().getId());
                 return true;
