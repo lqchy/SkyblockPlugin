@@ -31,7 +31,7 @@ public class ItemCommand implements CommandExecutor {
                 ItemStack item = new GrapplingHook().getItem();
 
                 player.getInventory().addItem(item);
-                player.sendMessage(util.devPrefix + "§aYou were given a " + new GrapplingHook().getId());
+                player.sendMessage(util.devPrefix + "§aYou were given a GRAPPLING_HOOK");
                 return true;
             } else {
                 player.sendMessage("§cYou do not have permission to use that command.");
