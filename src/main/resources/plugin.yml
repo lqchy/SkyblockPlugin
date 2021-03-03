@@ -7,3 +7,5 @@ description: Skyblock remake.
 commands:
   item:
     description: Get an item.
+  whereami:
+    description: Where are you?
