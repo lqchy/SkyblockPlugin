@@ -1,5 +1,6 @@
 package me.lachy.skyblock;
 
+import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,6 +17,7 @@ public final class Skyblock extends JavaPlugin {
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
 
         new ItemCommand(this);
+        new WhereAmICommand(this);
     }
 
     @Override

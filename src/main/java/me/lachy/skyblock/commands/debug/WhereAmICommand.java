@@ -8,6 +8,12 @@ import org.bukkit.entity.Player;
 
 public class WhereAmICommand implements CommandExecutor {
 
+    private Skyblock plugin;
+
+    public WhereAmICommand(Skyblock plugin) {
+        this.plugin = plugin;
+        plugin.getCommand("whereami").setExecutor(this);
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
