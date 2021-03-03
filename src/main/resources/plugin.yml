@@ -1,0 +1,6 @@
+name: Skyblock
+version: ${project.version}
+main: me.lachy.skyblock.Skyblock
+api-version: 1.16
+authors: [ lqchy_, Cadet4U, Funniery ]
+description: Skyblock remake.
