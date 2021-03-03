@@ -6,8 +6,7 @@ public final class Skyblock extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
+        getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
     }
 
     @Override
