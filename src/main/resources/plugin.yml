@@ -1,6 +1,9 @@
 name: Skyblock
 version: ${project.version}
 main: me.lachy.skyblock.Skyblock
-api-version: 1.16
+api-version: 1.8.8
 authors: [ lqchy_, Cadet4U, Funniery ]
 description: Skyblock remake.
+commands:
+  getitem:
+    description: Get an item.
