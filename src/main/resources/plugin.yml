@@ -5,5 +5,5 @@ api-version: 1.8.8
 authors: [ lqchy_, Cadet4U, Funniery ]
 description: Skyblock remake.
 commands:
-  getitem:
+  item:
     description: Get an item.

@@ -3,20 +3,18 @@ package me.lachy.skyblock.commands.dev;
 import me.lachy.skyblock.Skyblock;
 import me.lachy.skyblock.items.GrapplingHook;
 import me.lachy.skyblock.util.Util;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
-public class GetItemCommand implements CommandExecutor {
+public class ItemCommand implements CommandExecutor {
 
     private Skyblock plugin;
     private Util util;
 
-    public GetItemCommand(Skyblock plugin) {
+    public ItemCommand(Skyblock plugin) {
         this.plugin = plugin;
         plugin.getCommand("item").setExecutor(this);
     }
