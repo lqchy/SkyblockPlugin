@@ -5,7 +5,7 @@ api-version: 1.8.8
 authors: [ lqchy_, Cadet4U, Funniery ]
 description: Skyblock remake.
 commands:
-  item:
+  items:
     description: Get an item.
   whereami:
     description: Where are you?
