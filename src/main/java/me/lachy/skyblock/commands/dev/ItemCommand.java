@@ -1,7 +1,6 @@
 package me.lachy.skyblock.commands.dev;
 
 import me.lachy.skyblock.Skyblock;
-import me.lachy.skyblock.items.GrapplingHook;
 import me.lachy.skyblock.util.Util;
 import me.mattstudios.mfgui.gui.components.util.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
@@ -50,7 +49,11 @@ public class ItemCommand implements CommandExecutor {
                 gui.getFiller().fillBottom(new GuiItem(filler));
 
                 plugin.items.sort(Comparator.comparing(o -> ChatColor.stripColor(o.getItemMeta().getDisplayName())));
-                plugin.items.forEach(itemStack -> gui.addItem(new GuiItem(itemStack)));
+                plugin.items.forEach(itemStack -> gui.addItem(new GuiItem(itemStack, event -> {
+                    event.getWhoClicked().getInventory().addItem(itemStack);
+                    event.setCancelled(true);
+                    event.getWhoClicked().closeInventory();
+                })));
 
                 gui.open(player);
 
