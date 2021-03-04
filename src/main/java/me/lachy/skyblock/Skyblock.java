@@ -27,13 +27,17 @@ public final class Skyblock extends JavaPlugin {
         new ItemCommand(this);
         new WhereAmICommand(this);
 
-        items.add(new ItemBuilder(Material.FISHING_ROD).setName("§aGrappling Hook").toItemStack());
-        items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").toItemStack());
+        initItems(items);
 
     }
 
     @Override
     public void onDisable() {
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been disabled.");
+    }
+
+    public void initItems(List<ItemStack> items) {
+        items.add(new ItemBuilder(Material.FISHING_ROD).setName("§aGrappling Hook").setLore("", "§a§lUNCOMMON").toItemStack());
+        items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
     }
 }
