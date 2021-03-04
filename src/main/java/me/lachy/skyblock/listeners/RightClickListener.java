@@ -4,16 +4,14 @@ import me.lachy.skyblock.Skyblock;
 import me.lachy.skyblock.items.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.Gui;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 public class RightClickListener implements Listener {
 
@@ -60,6 +58,12 @@ public class RightClickListener implements Listener {
                     }));
 
                     weatherStickGui.open(player);
+                    break;
+                case "aspect of the end":
+                    Location location = player.getLocation().toVector().multiply(8).normalize().toLocation(player.getWorld());
+                    player.getWorld().playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                    player.teleport(location);
+                    break;
             }
         }
     }
