@@ -52,7 +52,7 @@ public class ItemCommand implements CommandExecutor {
                 plugin.items.sort(Comparator.comparing(o -> ChatColor.stripColor(o.getItemMeta().getDisplayName())));
                 plugin.items.forEach(itemStack -> gui.addItem(new GuiItem(itemStack, event -> {
                     event.getWhoClicked().getInventory().addItem(itemStack);
-                    event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.NOTE_PLING, 1.0F, 1.0F);
+                    event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.ORB_PICKUP, 1.0F, 1.0F);
                     event.getWhoClicked().sendMessage(Skyblock.debugPrefix + "§fYou were given " + itemStack.getItemMeta().getDisplayName());
                     event.setCancelled(true);
                     event.getWhoClicked().closeInventory();
