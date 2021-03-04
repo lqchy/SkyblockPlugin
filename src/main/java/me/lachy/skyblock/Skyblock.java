@@ -1,5 +1,6 @@
 package me.lachy.skyblock;
 
+import com.sun.tools.javac.util.RichDiagnosticFormatter;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import me.lachy.skyblock.items.ItemBuilder;
@@ -27,6 +28,8 @@ public final class Skyblock extends JavaPlugin {
 
         new ItemCommand(this);
         new WhereAmICommand(this);
+
+        getServer().getPluginManager().registerEvents(new RightClickListener(), this);
 
         initItems(items);
     }
