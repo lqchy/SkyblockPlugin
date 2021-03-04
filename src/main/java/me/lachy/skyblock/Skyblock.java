@@ -28,11 +28,7 @@ public final class Skyblock extends JavaPlugin {
         new ItemCommand(this);
         new WhereAmICommand(this);
 
-        getServer().getPluginManager().registerEvents(new RightClickListener(this), this);
-
         initItems(items);
-        initEvents(this);
-
     }
 
     @Override
@@ -45,7 +41,4 @@ public final class Skyblock extends JavaPlugin {
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
     }
 
-    public void initEvents(Skyblock plugin) {
-        plugin.getServer().getPluginManager().registerEvents(new RightClickListener(plugin), plugin);
-    }
 }
