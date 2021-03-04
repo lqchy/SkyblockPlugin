@@ -3,6 +3,7 @@ package me.lachy.skyblock;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import me.lachy.skyblock.items.ItemBuilder;
+import me.lachy.skyblock.listeners.RightClickListener;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,7 +28,10 @@ public final class Skyblock extends JavaPlugin {
         new ItemCommand(this);
         new WhereAmICommand(this);
 
+        getServer().getPluginManager().registerEvents(new RightClickListener(this), this);
+
         initItems(items);
+        initEvents(this);
 
     }
 
@@ -39,5 +43,9 @@ public final class Skyblock extends JavaPlugin {
     public void initItems(List<ItemStack> items) {
         items.add(new ItemBuilder(Material.FISHING_ROD).setName("§aGrappling Hook").setLore("", "§a§lUNCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
+    }
+
+    public void initEvents(Skyblock plugin) {
+        plugin.getServer().getPluginManager().registerEvents(new RightClickListener(plugin), plugin);
     }
 }
