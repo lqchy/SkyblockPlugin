@@ -35,7 +35,7 @@ public class RightClickListener implements Listener {
                     break;
                 case "weather stick":
                     Gui weatherStickGui = new Gui(3, "Weather Stick");
-                    ItemStack sunny = new ItemBuilder(Material.YELLOW_FLOWER).setName("§eSunny").addLoreLine("§7Sets the weather to §eSunny.").toItemStack();
+                    ItemStack sunny = new ItemBuilder(Material.DOUBLE_PLANT).setName("§eSunny").addLoreLine("§7Sets the weather to §eSunny.").toItemStack();
                     ItemStack rain = new ItemBuilder(Material.WATER_BUCKET).setName("§9Rain").addLoreLine("§7Sets the weather to §9Rain.").toItemStack();
                     ItemStack thunder = new ItemBuilder(Material.FLINT_AND_STEEL).setName("§fThunder").addLoreLine("§7Sets the weather to §fThunder.").toItemStack();
                     weatherStickGui.setItem(11, new GuiItem(sunny, sun -> {
