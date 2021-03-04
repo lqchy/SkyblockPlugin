@@ -45,12 +45,14 @@ public class RightClickListener implements Listener {
                         sun.setCancelled(true);
                     }));
                     weatherStickGui.setItem(13, new GuiItem(rain, rain1 -> {
-                        rain1.getWhoClicked().getWorld().setWeatherDuration(99999);
+                        rain1.getWhoClicked().getWorld().setStorm(true);
+                        rain1.getWhoClicked().getWorld().setThundering(false);
                         rain1.getWhoClicked().sendMessage("§aWeather set to §9Rain§a.");
                         rain1.getWhoClicked().closeInventory();
                         rain1.setCancelled(true);
                     }));
                     weatherStickGui.setItem(15, new GuiItem(thunder, th -> {
+                        th.getWhoClicked().getWorld().setStorm(true);
                         th.getWhoClicked().getWorld().setThundering(true);
                         th.getWhoClicked().sendMessage("§aWeather set to §fThunder§a.");
                         th.getWhoClicked().closeInventory();
