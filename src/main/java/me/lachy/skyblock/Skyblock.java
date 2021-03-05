@@ -1,10 +1,15 @@
 package me.lachy.skyblock;
 
-import com.sun.tools.javac.util.RichDiagnosticFormatter;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import me.lachy.skyblock.items.ItemBuilder;
+import me.lachy.skyblock.listeners.GrappleListener;
 import me.lachy.skyblock.listeners.RightClickListener;
+import org.bson.Document;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,12 +31,22 @@ public final class Skyblock extends JavaPlugin {
     public void onEnable() {
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
 
+        // Mongo connection
+        MongoClient mongoClient = connectToMongo();
+        MongoDatabase database = mongoClient.getDatabase("skyblock");
+        MongoCollection<Document> collection = database.getCollection("stats");
+
         new ItemCommand(this);
         new WhereAmICommand(this);
 
         getServer().getPluginManager().registerEvents(new RightClickListener(), this);
+        getServer().getPluginManager().registerEvents(new GrappleListener(), this);
 
         initItems(items);
+    }
+
+    public static MongoClient connectToMongo() {
+        return MongoClients.create("mongodb+srv://lachlan:AFhRHd4TfDzamD4R@tlgolgends1.1bsyw.mongodb.net/skyblock?retryWrites=true&w=majority");
     }
 
     @Override

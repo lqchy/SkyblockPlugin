@@ -25,7 +25,7 @@ public class RightClickListener implements Listener {
             ItemStack item = player.getInventory().getItemInHand();
 
             if (!item.hasItemMeta()) return;
-            if (!player.getGameMode().equals(GameMode.SURVIVAL)) return;
+            //if (!player.getGameMode().equals(GameMode.SURVIVAL)) return;
 
             switch (ChatColor.stripColor(item.getItemMeta().getDisplayName()).toLowerCase()) {
                 case "aspect of the jerry":
@@ -66,19 +66,29 @@ public class RightClickListener implements Listener {
                     Location loc = player.getLocation();
                     Vector dir = loc.getDirection();
                     dir.normalize();
-                    dir.multiply(8);
-                    loc.add(dir);
+
                     BlockIterator iterator = new BlockIterator(player.getWorld(),
                             player.getLocation().toVector(),
                             player.getLocation().getDirection().toBlockVector(),
-                            2.0, 8);
+                            1.0, 8);
+
+                    double multiply;
 
                     while (iterator.hasNext()) {
                         if (!iterator.next().getType().equals(Material.AIR)) {
-                            player.sendMessage("§cThere are blocks in the way!");
+                            multiply = iterator.next().getLocation().distance(player.getLocation(loc));
+                            dir.multiply(multiply - 2);
+                            loc.add(dir);
+
+                            player.teleport(loc);
+                            player.getWorld().playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                            player.sendMessage("§cThere were blocks in the way!");
                             return;
                         }
                     }
+
+                    dir.multiply(8);
+                    loc.add(dir);
 
                     player.teleport(loc);
                     if (!player.getTargetBlock((HashSet<Byte>) null, 8).getType().equals(Material.AIR)) {
