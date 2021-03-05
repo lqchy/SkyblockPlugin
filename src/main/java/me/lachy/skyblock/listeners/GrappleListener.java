@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class GrappleListener implements Listener {
 
-    private HashMap<String, Long> cooldown = new HashMap<String, Long>();
+    private HashMap<String, Long> cooldown = new HashMap<>();
     private int cooldowntime = 2;
 
     @EventHandler
@@ -26,20 +26,18 @@ public class GrappleListener implements Listener {
         Player p = e.getPlayer();
         ItemStack item = p.getItemInHand();
         if (e.getState() == PlayerFishEvent.State.FAILED_ATTEMPT || e.getState() == PlayerFishEvent.State.IN_GROUND) {
-            if (item.getItemMeta().getItemFlags().contains(ItemFlag.HIDE_ATTRIBUTES)) {
-                if (cooldown.containsKey(p.getName())) {
-                    if (cooldown.get(p.getName()) > System.currentTimeMillis()) {
-                        p.sendMessage("§cSlow down!");
-                        return;
-                    }
+            if (cooldown.containsKey(p.getName())) {
+                if (cooldown.get(p.getName()) > System.currentTimeMillis()) {
+                    p.sendMessage("§cSlow down!");
+                    return;
                 }
-                cooldown.put(p.getName(), System.currentTimeMillis() + (cooldowntime * 1000L));
-                Location loc1 = p.getLocation();
-                Location loc2 = e.getHook().getLocation();
-
-                Vector v = new Vector(loc2.getX() - loc1.getX(), 1, loc2.getZ() - loc1.getZ());
-                p.setVelocity(v);
             }
+            cooldown.put(p.getName(), System.currentTimeMillis() + (cooldowntime * 1000L));
+            Location loc1 = p.getLocation();
+            Location loc2 = e.getHook().getLocation();
+
+            Vector v = new Vector(loc2.getX() - loc1.getX(), 1, loc2.getZ() - loc1.getZ());
+            p.setVelocity(v);
         }
     }
 
