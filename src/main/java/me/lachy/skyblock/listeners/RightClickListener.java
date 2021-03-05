@@ -31,9 +31,6 @@ public class RightClickListener implements Listener {
                 case "aspect of the jerry":
                     player.getWorld().playSound(player.getLocation(), Sound.VILLAGER_IDLE, 1.0F, 1.0F);
                     break;
-                case "grappling hook":
-                    player.sendMessage("WIP");
-                    break;
                 case "weather stick":
                     Gui weatherStickGui = new Gui(3, "Weather Stick");
                     ItemStack sunny = new ItemBuilder(Material.DOUBLE_PLANT).setName("§eSunny").addLoreLine("§7Sets the weather to §eSunny.").toItemStack();
