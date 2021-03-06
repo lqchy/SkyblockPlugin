@@ -4,10 +4,14 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import me.lachy.skyblock.commands.debug.StatsCommand;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
+import me.lachy.skyblock.commands.dev.SpawnCommand;
 import me.lachy.skyblock.items.ItemBuilder;
+import me.lachy.skyblock.listeners.EntityDamageListener;
 import me.lachy.skyblock.listeners.GrappleListener;
+import me.lachy.skyblock.listeners.LoginListener;
 import me.lachy.skyblock.listeners.RightClickListener;
 import org.bson.Document;
 import org.bukkit.Material;
@@ -31,16 +35,15 @@ public final class Skyblock extends JavaPlugin {
     public void onEnable() {
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
 
-        // Mongo connection
-        MongoClient mongoClient = connectToMongo();
-        MongoDatabase database = mongoClient.getDatabase("skyblock");
-        MongoCollection<Document> collection = database.getCollection("stats");
-
         new ItemCommand(this);
         new WhereAmICommand(this);
+        new SpawnCommand(this);
+        new StatsCommand(this);
 
         getServer().getPluginManager().registerEvents(new RightClickListener(), this);
         getServer().getPluginManager().registerEvents(new GrappleListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
+        getServer().getPluginManager().registerEvents(new LoginListener(), this);
 
         initItems(items);
     }

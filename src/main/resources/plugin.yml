@@ -9,3 +9,7 @@ commands:
     description: Get an item.
   whereami:
     description: Where are you?
+  spawn:
+    description: Spawn a mob.
+  stats:
+    description: Sets health.
