@@ -98,6 +98,9 @@ public class RightClickListener implements Listener {
                     player.launchProjectile(Arrow.class);
                     *im confused man I dont know if I need the directionor not
                     break;
+                case "nons' tear":
+                    player.getWorld().playSound(player.getLocation(), Sound.GHAST_HURT, 1.0F, 1.0F);
+                    break;
             }
         }
     }
