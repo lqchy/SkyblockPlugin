@@ -94,6 +94,10 @@ public class RightClickListener implements Listener {
                     }
                     player.getWorld().playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                     break;
+                case "archer's stick":
+                    player.launchProjectile(Arrow.class);
+                    *im confused man I dont know if I need the directionor not
+                    break;
             }
         }
     }
