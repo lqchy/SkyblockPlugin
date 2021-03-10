@@ -96,7 +96,7 @@ public class RightClickListener implements Listener {
                     break;
                 case "archer's stick":
                     player.launchProjectile(Arrow.class);
-                    *im confused man I dont know if I need the directionor not
+                    // is this the way to comment?
                     break;
                 case "nons' tear":
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_HURT, 1.0F, 1.0F);
