@@ -20,9 +20,9 @@ public class StatsCommand implements CommandExecutor {
 
         if (commandSender instanceof Player) {
             Player player = (Player) commandSender;
-            player.setMaxHealth(100);
-            player.setHealth(player.getMaxHealth());
-            player.sendMessage("Set to 100");
+            plugin.getConfig().getConfigurationSection(player.getUniqueId().toString()).set(strings[0].toLowerCase(), Integer.valueOf(strings[1]));
+            player.sendMessage("§aSet " + strings[0] + " to " + strings[1]);
+            plugin.saveConfig();
         }
 
         return true;

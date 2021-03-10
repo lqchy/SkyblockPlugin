@@ -1,9 +1,5 @@
 package me.lachy.skyblock;
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import me.lachy.skyblock.commands.debug.StatsCommand;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
@@ -13,7 +9,6 @@ import me.lachy.skyblock.listeners.EntityDamageListener;
 import me.lachy.skyblock.listeners.GrappleListener;
 import me.lachy.skyblock.listeners.LoginListener;
 import me.lachy.skyblock.listeners.RightClickListener;
-import org.bson.Document;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -40,16 +35,15 @@ public final class Skyblock extends JavaPlugin {
         new SpawnCommand(this);
         new StatsCommand(this);
 
+        initItems(items);
+        initEvents();
+    }
+
+    private void initEvents() {
         getServer().getPluginManager().registerEvents(new RightClickListener(), this);
         getServer().getPluginManager().registerEvents(new GrappleListener(), this);
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
-        getServer().getPluginManager().registerEvents(new LoginListener(), this);
-
-        initItems(items);
-    }
-
-    public static MongoClient connectToMongo() {
-        return MongoClients.create("mongodb+srv://lachlan:AFhRHd4TfDzamD4R@tlgolgends1.1bsyw.mongodb.net/skyblock?retryWrites=true&w=majority");
+        getServer().getPluginManager().registerEvents(new LoginListener(this), this);
     }
 
     @Override
@@ -62,6 +56,7 @@ public final class Skyblock extends JavaPlugin {
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.STICK).setName("§aWeather Stick").setLore("", "§a§lUNCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.DIAMOND_SWORD).setName("§9Aspect of the End").setLore("", "§9§lRARE").toItemStack());
+        items.add(new ItemBuilder(Material.BLAZE_ROD).setName("§9Archer's Stick").setLore("", "§9§lRARE").toItemStack());
+        items.add(new ItemBuilder(Material.GHAST_TEAR).setName("§aNon's Tear").setLore("", "§a§lUNCOMMON").toItemStack());
     }
-
 }

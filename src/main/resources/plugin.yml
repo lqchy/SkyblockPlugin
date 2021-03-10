@@ -13,3 +13,5 @@ commands:
     description: Spawn a mob.
   stats:
     description: Sets health.
+  ping:
+    description: Track your ping.

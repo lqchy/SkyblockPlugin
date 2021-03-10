@@ -5,6 +5,7 @@ import me.lachy.skyblock.items.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.Gui;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import org.bukkit.*;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -93,6 +94,12 @@ public class RightClickListener implements Listener {
                         return;
                     }
                     player.getWorld().playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                    break;
+                case "archer's stick":
+                    player.launchProjectile(Arrow.class);
+                    break;
+                case "non's tear":
+                    player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 1.0F, 1.0F);
                     break;
             }
         }
