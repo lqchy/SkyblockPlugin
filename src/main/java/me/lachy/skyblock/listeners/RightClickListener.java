@@ -21,7 +21,7 @@ import java.util.HashSet;
 public class RightClickListener implements Listener {
 
     private HashMap<String, Long> cooldown = new HashMap<>();
-    private int cooldowntime = 1;
+    private int cooldowntime = 2;
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent event) {
