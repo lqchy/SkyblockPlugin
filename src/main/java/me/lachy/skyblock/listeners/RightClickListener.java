@@ -15,9 +15,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class RightClickListener implements Listener {
+
+    private HashMap<String, Long> cooldown = new HashMap<>();
+    private int cooldowntime = 1;
 
     @EventHandler
     public void onRightClick(PlayerInteractEvent event) {
@@ -96,6 +100,12 @@ public class RightClickListener implements Listener {
                     player.getWorld().playSound(player.getLocation(), Sound.ENDERMAN_TELEPORT, 1.0F, 1.0F);
                     break;
                 case "archer's stick":
+                    if (cooldown.containsKey(player.getName())) {
+                        if (cooldown.get(player.getName()) > System.currentTimeMillis()) {
+                            return;
+                        }
+                    }
+                    cooldown.put(player.getName(), System.currentTimeMillis() + (cooldowntime * 1000L));
                     player.launchProjectile(Arrow.class);
                     break;
                 case "non's tear":
