@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 
 public class EntityDamageListener implements Listener {
 
@@ -18,7 +19,15 @@ public class EntityDamageListener implements Listener {
 
         if (event.getEntity().getPassenger() != null) {
             LivingEntity e = (LivingEntity) event.getEntity();
-            event.getEntity().getPassenger().setCustomName("§7" + ((int) e.getHealth()) + "§a/" + ((int) e.getMaxHealth()));
+            event.getEntity().getPassenger().setCustomName("§7" + e.getName() + " §8| §a" + ((int) e.getHealth()) + "§2/" + ((int) e.getMaxHealth()));
+        }
+    }
+
+    @EventHandler
+    public void onHeal(EntityRegainHealthEvent event) {
+        if (event.getEntity().getPassenger() != null) {
+            LivingEntity e = (LivingEntity) event.getEntity();
+            event.getEntity().getPassenger().setCustomName("§7" + e.getName() + " §8| §a" + ((int) e.getHealth()) + "§2/" + ((int) e.getMaxHealth()));
         }
     }
 

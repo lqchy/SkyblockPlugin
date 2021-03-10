@@ -5,10 +5,7 @@ import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import me.lachy.skyblock.commands.dev.SpawnCommand;
 import me.lachy.skyblock.items.ItemBuilder;
-import me.lachy.skyblock.listeners.EntityDamageListener;
-import me.lachy.skyblock.listeners.GrappleListener;
-import me.lachy.skyblock.listeners.LoginListener;
-import me.lachy.skyblock.listeners.RightClickListener;
+import me.lachy.skyblock.listeners.*;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -44,6 +41,7 @@ public final class Skyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new GrappleListener(), this);
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
         getServer().getPluginManager().registerEvents(new LoginListener(this), this);
+        getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
     }
 
     @Override
