@@ -56,5 +56,6 @@ public final class Skyblock extends JavaPlugin {
         items.add(new ItemBuilder(Material.DIAMOND_SWORD).setName("§9Aspect of the End").setLore("", "§9§lRARE").toItemStack());
         items.add(new ItemBuilder(Material.BLAZE_ROD).setName("§9Archer's Stick").setLore("", "§9§lRARE").toItemStack());
         items.add(new ItemBuilder(Material.GHAST_TEAR).setName("§aNon's Tear").setLore("", "§a§lUNCOMMON").toItemStack());
+        items.add(new ItemBuilder(Material.IRON_SWORD).setName("§6Hyperion").setLore("", "§6§lLEGENDARY").toItemStack());
     }
 }
