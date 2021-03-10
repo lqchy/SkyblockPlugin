@@ -6,6 +6,8 @@ import me.mattstudios.mfgui.gui.guis.Gui;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
+import org.graalvm.compiler.core.phases.EconomyHighTier;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -112,40 +115,58 @@ public class RightClickListener implements Listener {
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 1.0F, 1.0F);
                     break;
                 case "hyperion":
-                    Location loc = player.getLocation();
-                    Vector dir = loc.getDirection();
-                    dir.normalize();
+                    Location loc2 = player.getLocation();
+                    Vector dir2 = loc2.getDirection();
+                    dir2.normalize();
 
-                    BlockIterator iterator = new BlockIterator(player.getWorld(),
+                    BlockIterator iterator2 = new BlockIterator(player.getWorld(),
                             player.getLocation().toVector(),
                             player.getLocation().getDirection().toBlockVector(),
                             1.0, 8);
 
-                    double multiply;
+                    double multiply2;
 
-                    while (iterator.hasNext()) {
-                        if (!iterator.next().getType().equals(Material.AIR)) {
-                            multiply = iterator.next().getLocation().distance(player.getLocation(loc));
-                            dir.multiply(multiply - 2);
-                            loc.add(dir);
+                    while (iterator2.hasNext()) {
+                        if (!iterator2.next().getType().equals(Material.AIR)) {
+                            multiply2 = iterator2.next().getLocation().distance(player.getLocation(loc2));
+                            dir2.multiply(multiply2 - 2);
+                            loc2.add(dir2);
 
-                            player.teleport(loc);
-                            player.getWorld().playSound(player.getLocation(), Sound.GENERIC_EXPLODE, 1.0F, 1.0F);
+                            player.teleport(loc2);
+                            player.getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_HUGE, Integer.MAX_VALUE);
+
+                            player.getWorld().getNearbyEntities(player.getLocation(), 10, 10, 10).forEach(entity -> {
+                                if (entity == player) return;
+                                else if (entity instanceof Damageable) {
+                                    LivingEntity e = (LivingEntity) entity;
+                                    e.damage(e.getMaxHealth() + 2);
+                                }
+                            });
                             player.sendMessage("§cThere were blocks in the way!");
                             return;
                         }
                     }
 
-                    dir.multiply(8);
-                    loc.add(dir);
+                    dir2.multiply(10);
+                    loc2.add(dir2);
 
-                    player.teleport(loc);
+                    player.teleport(loc2);
+
                     if (!player.getTargetBlock((HashSet<Byte>) null, 8).getType().equals(Material.AIR)) {
                         player.sendMessage("§cThere are blocks in the way!");
                         return;
                     }
-                    player.getWorld().playSound(player.getLocation(), Sound.GENERIC_EXPLODE, 1.0F, 1.0F);
-                    entity.getWorld().createExplosion(Location loc, 6 radiusOfExplosion, false useFireOrNot);
+
+                    player.getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_HUGE, Integer.MAX_VALUE);
+
+                    player.getWorld().getNearbyEntities(player.getLocation(), 10, 10, 10).forEach(entity -> {
+                        if (entity == player) return;
+                        else if (entity instanceof Damageable) {
+                            LivingEntity e = (LivingEntity) entity;
+                            e.damage(e.getMaxHealth() + 2);
+                        }
+                    });
+                    break;
             }
         }
     }
