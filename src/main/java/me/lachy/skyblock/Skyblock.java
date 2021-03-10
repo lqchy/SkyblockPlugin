@@ -62,8 +62,8 @@ public final class Skyblock extends JavaPlugin {
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.STICK).setName("§aWeather Stick").setLore("", "§a§lUNCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.DIAMOND_SWORD).setName("§9Aspect of the End").setLore("", "§9§lRARE").toItemStack());
-        items.add(new ItemBuilder(Material.BLAZE_ROD).setName("§9Archer's Stick").setlore("", "§9§lRARE").toItemStack());
-        items.add(new ItemBuilder(Material.GHAST_TEAR).setname("§aNons' tear").setlore("", "§a§lUNCOMMON").toItemStack());
+        items.add(new ItemBuilder(Material.BLAZE_ROD).setName("§9Archer's Stick").setLore("", "§9§lRARE").toItemStack());
+        items.add(new ItemBuilder(Material.GHAST_TEAR).setname("§aNons' tear").setLore("", "§a§lUNCOMMON").toItemStack());
     }
 
 }
