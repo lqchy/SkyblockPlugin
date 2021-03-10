@@ -111,6 +111,41 @@ public class RightClickListener implements Listener {
                 case "non's tear":
                     player.getWorld().playSound(player.getLocation(), Sound.GHAST_SCREAM, 1.0F, 1.0F);
                     break;
+                case "hyperion":
+                    Location loc = player.getLocation();
+                    Vector dir = loc.getDirection();
+                    dir.normalize();
+
+                    BlockIterator iterator = new BlockIterator(player.getWorld(),
+                            player.getLocation().toVector(),
+                            player.getLocation().getDirection().toBlockVector(),
+                            1.0, 8);
+
+                    double multiply;
+
+                    while (iterator.hasNext()) {
+                        if (!iterator.next().getType().equals(Material.AIR)) {
+                            multiply = iterator.next().getLocation().distance(player.getLocation(loc));
+                            dir.multiply(multiply - 2);
+                            loc.add(dir);
+
+                            player.teleport(loc);
+                            player.getWorld().playSound(player.getLocation(), Sound.GENERIC_EXPLODE, 1.0F, 1.0F);
+                            player.sendMessage("§cThere were blocks in the way!");
+                            return;
+                        }
+                    }
+
+                    dir.multiply(8);
+                    loc.add(dir);
+
+                    player.teleport(loc);
+                    if (!player.getTargetBlock((HashSet<Byte>) null, 8).getType().equals(Material.AIR)) {
+                        player.sendMessage("§cThere are blocks in the way!");
+                        return;
+                    }
+                    player.getWorld().playSound(player.getLocation(), Sound.GENERIC_EXPLODE, 1.0F, 1.0F);
+                    entity.getWorld().createExplosion(Location loc, 6 radiusOfExplosion, false useFireOrNot);
             }
         }
     }
