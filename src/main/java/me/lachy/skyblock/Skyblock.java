@@ -3,15 +3,23 @@ package me.lachy.skyblock;
 import me.lachy.skyblock.commands.debug.StatsCommand;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
+import me.lachy.skyblock.commands.dev.NPCCommand;
 import me.lachy.skyblock.commands.dev.SpawnCommand;
+import me.lachy.skyblock.commands.general.BoopCommand;
 import me.lachy.skyblock.items.ItemBuilder;
 import me.lachy.skyblock.listeners.*;
+import me.lachy.skyblock.managers.NPCManager;
+import me.lachy.skyblock.managers.ScoreboardManager;
+import net.citizensnpcs.api.CitizensAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.NPC;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class Skyblock extends JavaPlugin {
 
@@ -23,6 +31,8 @@ public final class Skyblock extends JavaPlugin {
 
     public List<ItemStack> items = new ArrayList<>();
 
+    public Map<UUID, Integer> coins = new HashMap<>();
+
     @Override
     public void onEnable() {
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
@@ -31,6 +41,24 @@ public final class Skyblock extends JavaPlugin {
         new WhereAmICommand(this);
         new SpawnCommand(this);
         new StatsCommand(this);
+        new BoopCommand(this);
+        new NPCCommand(this);
+
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Bukkit.getOnlinePlayers().forEach(player -> {
+                    int coins = getConfig().getConfigurationSection(player.getUniqueId().toString()).getInt("coins");
+                    ScoreboardManager scoreboardManager = new ScoreboardManager("§e§lSKYBLOCK");
+                    scoreboardManager.addBlankSpace();
+                    scoreboardManager.addLine("Coins: §6" + coins);
+                    scoreboardManager.addBlankSpace();
+                    scoreboardManager.addLine("§e" + Bukkit.getServer().getOnlinePlayers().size() + " §fonline " + (Bukkit.getServer().getOnlinePlayers().size() >= 2 ? "players!" : "player!"));
+
+                    player.setScoreboard(scoreboardManager.getScoreboard());
+                });
+            }
+        }.runTaskTimer(this, 0, 10);
 
         initItems(items);
         initEvents();
@@ -42,6 +70,8 @@ public final class Skyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityDamageListener(), this);
         getServer().getPluginManager().registerEvents(new LoginListener(this), this);
         getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
+
+        CitizensAPI.registerEvents(new NPCRightClickEvent(this));
     }
 
     @Override

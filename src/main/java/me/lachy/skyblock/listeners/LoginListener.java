@@ -35,6 +35,7 @@ public class LoginListener implements Listener {
             section.set("defence", 0);
             section.set("mana", 100);
             section.set("health", 100);
+            section.set("coins", 0);
 
             plugin.saveConfig();
         } else {

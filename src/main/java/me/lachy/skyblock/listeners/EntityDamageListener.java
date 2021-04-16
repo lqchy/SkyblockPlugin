@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
 public class EntityDamageListener implements Listener {
 
@@ -37,6 +38,4 @@ public class EntityDamageListener implements Listener {
             event.getEntity().getPassenger().remove();
         }
     }
-
-
 }

@@ -4,6 +4,7 @@ main: me.lachy.skyblock.Skyblock
 api-version: 1.8.8
 authors: [ lqchy_, Cadet4U, Funniery ]
 description: Skyblock remake.
+depend: [Citizens]
 commands:
   items:
     description: Get an item.
@@ -13,5 +14,7 @@ commands:
     description: Spawn a mob.
   stats:
     description: Sets health.
-  ping:
-    description: Track your ping.
+  boop:
+    description: Boop!
+  npc:
+    description: NPCs.

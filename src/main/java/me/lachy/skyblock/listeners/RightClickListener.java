@@ -5,10 +5,7 @@ import me.lachy.skyblock.items.ItemBuilder;
 import me.mattstudios.mfgui.gui.guis.Gui;
 import me.mattstudios.mfgui.gui.guis.GuiItem;
 import org.bukkit.*;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -136,12 +133,13 @@ public class RightClickListener implements Listener {
                             player.getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_HUGE, Integer.MAX_VALUE);
 
                             player.getWorld().getNearbyEntities(player.getLocation(), 10, 10, 10).forEach(entity -> {
-                                if (entity == player) return;
+                                if (entity.getType() == EntityType.PLAYER || entity.getType() == EntityType.ARMOR_STAND) return;
                                 else if (entity instanceof Damageable) {
                                     LivingEntity e = (LivingEntity) entity;
                                     e.damage(e.getMaxHealth() + 2);
                                 }
                             });
+
                             player.sendMessage("§cThere were blocks in the way!");
                             return;
                         }
@@ -160,7 +158,7 @@ public class RightClickListener implements Listener {
                     player.getWorld().playEffect(player.getLocation(), Effect.EXPLOSION_HUGE, Integer.MAX_VALUE);
 
                     player.getWorld().getNearbyEntities(player.getLocation(), 10, 10, 10).forEach(entity -> {
-                        if (entity == player) return;
+                        if (entity.getType() == EntityType.PLAYER || entity.getType() == EntityType.ARMOR_STAND) return;
                         else if (entity instanceof Damageable) {
                             LivingEntity e = (LivingEntity) entity;
                             e.damage(e.getMaxHealth() + 2);
