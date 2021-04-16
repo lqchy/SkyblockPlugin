@@ -19,6 +19,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public final class Skyblock extends JavaPlugin {
@@ -51,14 +52,18 @@ public final class Skyblock extends JavaPlugin {
                     int coins = getConfig().getConfigurationSection(player.getUniqueId().toString()).getInt("coins");
                     ScoreboardManager scoreboardManager = new ScoreboardManager("§e§lSKYBLOCK");
                     scoreboardManager.addBlankSpace();
-                    scoreboardManager.addLine("Coins: §6" + coins);
+
+                    double amount = Double.parseDouble(String.valueOf(coins));
+                    DecimalFormat formatter = new DecimalFormat("#,###.0");
+                    scoreboardManager.addLine("Coins: §6" + formatter.format(amount));
+
                     scoreboardManager.addBlankSpace();
                     scoreboardManager.addLine("§e" + Bukkit.getServer().getOnlinePlayers().size() + " §fonline " + (Bukkit.getServer().getOnlinePlayers().size() >= 2 ? "players!" : "player!"));
 
                     player.setScoreboard(scoreboardManager.getScoreboard());
                 });
             }
-        }.runTaskTimer(this, 0, 10);
+        }.runTaskTimer(this, 0, 20);
 
         initItems(items);
         initEvents();
