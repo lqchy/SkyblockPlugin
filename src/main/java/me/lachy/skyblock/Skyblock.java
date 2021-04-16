@@ -2,6 +2,7 @@ package me.lachy.skyblock;
 
 import me.lachy.skyblock.commands.debug.StatsCommand;
 import me.lachy.skyblock.commands.debug.WhereAmICommand;
+import me.lachy.skyblock.commands.dev.CoinsCommand;
 import me.lachy.skyblock.commands.dev.ItemCommand;
 import me.lachy.skyblock.commands.dev.NPCCommand;
 import me.lachy.skyblock.commands.dev.SpawnCommand;
@@ -44,6 +45,7 @@ public final class Skyblock extends JavaPlugin {
         new StatsCommand(this);
         new BoopCommand(this);
         new NPCCommand(this);
+        new CoinsCommand(this);
 
         new BukkitRunnable() {
             @Override

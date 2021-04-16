@@ -18,3 +18,5 @@ commands:
     description: Boop!
   npc:
     description: NPCs.
+  coins:
+    description: Add/remove coins.
