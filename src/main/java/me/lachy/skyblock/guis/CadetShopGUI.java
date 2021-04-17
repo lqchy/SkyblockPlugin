@@ -43,7 +43,7 @@ public class CadetShopGUI {
 
         cadet.setItem(10, new GuiItem(talisman));
         cadet.addSlotAction(10, event -> {
-            int coins = (int) plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).get("coins");
+            double coins = plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).getDouble("coins");
             if (coins >= 100) {
                 event.getWhoClicked().getInventory().addItem(talisman);
                 event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.ORB_PICKUP, 1.0F, 1.0F);
