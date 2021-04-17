@@ -30,8 +30,9 @@ public class CoinsCommand implements CommandExecutor {
                     double current = section.getDouble("coins");
                     double newCoins = current + toAdd;
                     section.set("coins", newCoins);
+                    plugin.saveConfig();
 
-                    player.sendMessage("§aCoins of player §6" + target.getName() + " increased by " + toAdd + "§a. They now have §6" + current + " §acoins.");
+                    player.sendMessage("§aCoins of player §6" + target.getName() + " §aincreased by §6" + toAdd + "§a. They now have §6" + newCoins + " §acoins.");
                     target.sendMessage("§aYou were given coins by an admin!");
                 }
             }
