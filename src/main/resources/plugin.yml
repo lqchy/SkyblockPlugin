@@ -4,7 +4,7 @@ main: me.lachy.skyblock.Skyblock
 api-version: 1.8.8
 authors: [ lqchy_, Cadet4U, Funniery ]
 description: Skyblock remake.
-depend: [Citizens]
+depend: [ Citizens, SignGUI]
 commands:
   items:
     description: Get an item.

@@ -62,4 +62,15 @@ public class CadetShopGUI {
         return cadet;
     }
 
+
+    public ItemStack cadetTalisman() {
+        ItemStack talisman = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+        SkullMeta smeta = (SkullMeta) talisman.getItemMeta();
+        smeta.setOwner("Cadet4U");
+        smeta.setDisplayName("§aCadet Talisman");
+        smeta.setLore(Arrays.asList("", "§eAbility: Tallness", "§7Reduces speed because Cadet is too tall", "", "§a§lUNCOMMON", "", "§8Price:", "§6100 coins"));
+        talisman.setItemMeta(smeta);
+
+        return talisman;
+    }
 }

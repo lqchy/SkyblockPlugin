@@ -8,6 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
+
 public class CoinsCommand implements CommandExecutor {
 
     private Skyblock plugin;
@@ -26,13 +30,15 @@ public class CoinsCommand implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
                     ConfigurationSection section = plugin.getConfig().getConfigurationSection(target.getUniqueId().toString());
-                    double toAdd = Double.parseDouble(args[1]);
+                    BigDecimal toAdd = BigDecimal.valueOf(Long.parseLong(args[1]));
                     double current = section.getDouble("coins");
-                    double newCoins = current + toAdd;
-                    section.set("coins", newCoins);
+                    BigDecimal newCoins = BigDecimal.valueOf(current + toAdd.doubleValue());
+                    section.set("coins", newCoins.doubleValue());
                     plugin.saveConfig();
 
-                    player.sendMessage("§aCoins of player §6" + target.getName() + " §aincreased by §6" + toAdd + "§a. They now have §6" + newCoins + " §acoins.");
+                    DecimalFormat f = new DecimalFormat("#,###.0");
+
+                    player.sendMessage("§aCoins of player §6" + target.getName() + " §aincreased by §6" + f.format(toAdd.intValue()) + "§a. They now have §6" + f.format(newCoins.intValue()) + " §acoins.");
                     target.sendMessage("§aYou were given coins by an admin!");
                 }
             }

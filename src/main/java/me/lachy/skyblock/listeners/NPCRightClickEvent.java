@@ -1,6 +1,7 @@
 package me.lachy.skyblock.listeners;
 
 import me.lachy.skyblock.Skyblock;
+import me.lachy.skyblock.guis.BankGui;
 import me.lachy.skyblock.guis.CadetShopGUI;
 import me.mattstudios.mfgui.gui.guis.Gui;
 import org.bukkit.event.EventHandler;
@@ -19,6 +20,10 @@ public class NPCRightClickEvent implements Listener {
             Gui cadet = new CadetShopGUI(plugin).gui();
             cadet.open(event.getClicker());
         }
-    }
 
+        if (event.getNPC().isSpawned() && event.getNPC().getName().equals("§eBank")) {
+            Gui bank = new BankGui(plugin).gui(event.getClicker());
+            bank.open(event.getClicker());
+        }
+    }
 }
