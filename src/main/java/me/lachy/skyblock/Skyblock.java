@@ -16,6 +16,8 @@ import net.citizensnpcs.api.CitizensAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.SkullType;
+import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,6 +31,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class Skyblock extends JavaPlugin {
+
+    private static Skyblock instance;
+
+    public static Skyblock getInstance() {
+        return instance;
+    }
 
     public static String mainPrefix = "§2[SKYBLOCK]§r ";
     public static String debugPrefix = "§9[DEBUG]§r ";
@@ -52,6 +60,8 @@ public final class Skyblock extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        instance = this;
+
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been enabled.");
 
         new ItemCommand(this);
@@ -109,16 +119,21 @@ public final class Skyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MobSpawnListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerMoveListener(), this);
         getServer().getPluginManager().registerEvents(new SignUpdateListener(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerJumpListener(), this);
 
         CitizensAPI.registerEvents(new NPCRightClickEvent(this));
     }
 
     @Override
     public void onDisable() {
+        instance = null;
+
         getLogger().info(this.getName() + " " + this.getDescription().getVersion() + " has been disabled.");
     }
 
     public void initItems(List<ItemStack> items) {
+        ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+
         items.add(new ItemBuilder(Material.FISHING_ROD).setName("§aGrappling Hook").setLore("", "§a§lUNCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.STICK).setName("§aWeather Stick").setLore("", "§a§lUNCOMMON").toItemStack());
@@ -132,5 +147,10 @@ public final class Skyblock extends JavaPlugin {
         items.add(crystalArmor.boots());
         items.add(new ItemBuilder(Material.LEATHER_BOOTS).setName("§aSquid Boots").setLore("", "§a§lUNCOMMON BOOTS")
                 .setInfinityDurability().setLeatherArmorColor(Color.BLACK).toItemStack());
+        items.add(new ItemBuilder(Material.LEATHER_LEGGINGS).setName("§9Cadet Leggings").setLore("", "§eAbility: Long Legs",
+                "§8Gives a double jump effect every §b2 seconds§8 while jumping.", "", "§9§lRARE LEGGINGS")
+                .setLeatherArmorColor(Color.GREEN).setInfinityDurability().toItemStack());
+        items.add(new ItemBuilder(playerHead).setSkullOwner("Cadet4U").setName("§aCadet Talisman")
+                .setLore("", "§eAbility: Tallness", "§8Reduces speed because of Cadet's height", "", "§a§lUNCOMMON TALISMAN").toItemStack());
     }
 }

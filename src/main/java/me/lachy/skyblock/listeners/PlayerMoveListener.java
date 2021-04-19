@@ -28,27 +28,29 @@ public class PlayerMoveListener implements Listener {
             "#00d117", "#00e013", "#03ef0d", "#16ff02");
 
 
-    @EventHandler
-    public void crystalArmor(PlayerMoveEvent e) {
-        Player p = e.getPlayer();
-        List<ItemStack> armor = Arrays.asList(p.getInventory().getArmorContents());
-        byte lightLevel = p.getLocation().getBlock().getLightLevel();
-
-        int r = Integer.valueOf( crystalColours.get(lightLevel).substring( 1, 3 ), 16 );
-        int g = Integer.valueOf( crystalColours.get(lightLevel).substring( 3, 5 ), 16 );
-        int b = Integer.valueOf( crystalColours.get(lightLevel).substring( 5, 7 ), 16 );
-
-        armor.forEach(a -> {
-            LeatherArmorMeta m = (LeatherArmorMeta) a.getItemMeta();
-            m.setColor(Color.fromRGB(r, g, b));
-            a.setItemMeta(m);
-        });
-    }
+//    @EventHandler
+//    public void crystalArmor(PlayerMoveEvent e) {
+//        Player p = e.getPlayer();
+//        List<ItemStack> armor = Arrays.asList(p.getInventory().getArmorContents());
+//        byte lightLevel = p.getLocation().getBlock().getLightLevel();
+//
+//        int r = Integer.valueOf( crystalColours.get(lightLevel).substring( 1, 3 ), 16 );
+//        int g = Integer.valueOf( crystalColours.get(lightLevel).substring( 3, 5 ), 16 );
+//        int b = Integer.valueOf( crystalColours.get(lightLevel).substring( 5, 7 ), 16 );
+//
+//        armor.forEach(a -> {
+//            LeatherArmorMeta m = (LeatherArmorMeta) a.getItemMeta();
+//            m.setColor(Color.fromRGB(r, g, b));
+//            a.setItemMeta(m);
+//        });
+//    }
 
     @EventHandler
     public void squidBoots(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         ItemStack boots = p.getInventory().getBoots();
+
+        if (boots == null) return;
 
         if (boots.hasItemMeta()) {
             if (boots.getItemMeta().getDisplayName().equals("§aSquid Boots")) {
