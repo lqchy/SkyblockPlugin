@@ -29,6 +29,7 @@ public class RightClickListener implements Listener {
             Player player = event.getPlayer();
             ItemStack item = player.getInventory().getItemInHand();
 
+            if (item == null) return;
             if (!item.hasItemMeta()) return;
             //if (!player.getGameMode().equals(GameMode.SURVIVAL)) return;
 

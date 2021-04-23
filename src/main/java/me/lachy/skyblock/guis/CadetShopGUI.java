@@ -47,10 +47,12 @@ public class CadetShopGUI {
         ItemStack cadetLeggingsForShop = new ItemBuilder(Material.LEATHER_LEGGINGS)
                 .setName("§9Cadet Leggings")
                 .setLore("", "§eAbility: Long Legs",
-                "§8Gives a double jump effect every §b2 seconds§8 while jumping.", "", "§9§lRARE LEGGINGS", "", "§8Price:", "§65,000 coins")
+                "§8Gives a double jump effect every §b2 seconds§8 while jumping.", "", "§9§lRARE LEGGINGS", "", "§8Price:", "§6800 coins")
                 .setLeatherArmorColor(Color.GREEN).setInfinityDurability().toItemStack();
 
         cadet.setItem(10, new GuiItem(cadetTalismanForShop));
+        cadet.setItem(12, new GuiItem(cadetLeggingsForShop));
+
         cadet.addSlotAction(10, event -> {
             double coins = plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).getDouble("coins");
             if (coins >= 100) {
@@ -68,11 +70,11 @@ public class CadetShopGUI {
 
         cadet.addSlotAction(12, event -> {
             double coins = plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).getDouble("coins");
-            if (coins >= 5000) {
+            if (coins >= 800) {
                 event.getWhoClicked().getInventory().addItem(new ItemBuilder(cadetLeggingsForShop.clone()).removeLoreLine(7).removeLoreLine(6).removeLoreLine(5).toItemStack());
                 event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.ORB_PICKUP, 1.0F, 1.0F);
-                event.getWhoClicked().sendMessage("§aPurchased " + cadetLeggingsForShop.getItemMeta().getDisplayName().replace("§a", "§6"));
-                plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).set("coins", coins - 100);
+                event.getWhoClicked().sendMessage("§aPurchased " + cadetLeggingsForShop.getItemMeta().getDisplayName().replace("§9", "§6"));
+                plugin.getConfig().getConfigurationSection(event.getWhoClicked().getUniqueId().toString()).set("coins", coins - 800);
                 plugin.saveConfig();
             } else {
                 event.getWhoClicked().getWorld().playSound(event.getWhoClicked().getLocation(), Sound.ENDERMAN_HIT, 1.0F, 1.0F);

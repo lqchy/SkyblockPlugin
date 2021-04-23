@@ -34,6 +34,7 @@ public class PlayerJumpListener implements Listener {
 
         int cooldowntime = 2;
         if (event.getStatistic().equals(Statistic.JUMP)
+                && event.getPlayer().getInventory().getLeggings() != null
                 && event.getPlayer().getInventory().getLeggings().equals(cadetLeggings)
                 && (event.getPlayer().getGameMode() != GameMode.SPECTATOR || event.getPlayer().getGameMode() != GameMode.CREATIVE)) {
 

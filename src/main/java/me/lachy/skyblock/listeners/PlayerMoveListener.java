@@ -1,12 +1,19 @@
 package me.lachy.skyblock.listeners;
 
 import me.lachy.skyblock.Skyblock;
+import me.lachy.skyblock.items.ItemBuilder;
 import me.lachy.skyblock.items.armor.CrystalArmor;
 import me.lachy.skyblock.items.armor.MiscArmor;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import net.minecraft.server.v1_8_R3.PacketPlayOutWorldParticles;
 import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftMonster;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftZombie;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -93,5 +100,23 @@ public class PlayerMoveListener implements Listener {
             locations.add(new Location(world, x, center.getY(), z));
         }
         return locations;
+    }
+
+    @EventHandler
+    public void fearHelmet(PlayerMoveEvent e) {
+        Player p = e.getPlayer();
+        ItemStack fearHelmet = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack h = new ItemBuilder(fearHelmet).setSkullOwner("daFear").setName("§5Fear Helmet")
+                .setLore("", "§eAbility: Intimidation", "§8Mobs in an §b8 block radius §8will not target you", "", "§5§lEPIC HELMET").toItemStack();
+
+        if (p.getInventory().getHelmet() != null && p.getInventory().getHelmet().equals(h) && !(p.getGameMode() == GameMode.CREATIVE || p.getGameMode() == GameMode.SPECTATOR)) {
+            Collection<Entity> entities = p.getNearbyEntities(8, 8, 8);
+            for (Entity entity : entities) {
+                if (entity instanceof Monster) {
+                    p.sendMessage(entity.getCustomName());
+                    ((CraftMonster) entity).setTarget(((LivingEntity) entity));
+                }
+            }
+        }
     }
 }

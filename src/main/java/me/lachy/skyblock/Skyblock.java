@@ -132,7 +132,8 @@ public final class Skyblock extends JavaPlugin {
     }
 
     public void initItems(List<ItemStack> items) {
-        ItemStack playerHead = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack cadetTalisman = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
+        ItemStack fearHelmet = new ItemStack(Material.SKULL_ITEM, 1, (short) SkullType.PLAYER.ordinal());
 
         items.add(new ItemBuilder(Material.FISHING_ROD).setName("§aGrappling Hook").setLore("", "§a§lUNCOMMON").toItemStack());
         items.add(new ItemBuilder(Material.WOOD_SWORD).setName("§fAspect of the Jerry").setLore("", "§f§lCOMMON").toItemStack());
@@ -150,7 +151,9 @@ public final class Skyblock extends JavaPlugin {
         items.add(new ItemBuilder(Material.LEATHER_LEGGINGS).setName("§9Cadet Leggings").setLore("", "§eAbility: Long Legs",
                 "§8Gives a double jump effect every §b2 seconds§8 while jumping.", "", "§9§lRARE LEGGINGS")
                 .setLeatherArmorColor(Color.GREEN).setInfinityDurability().toItemStack());
-        items.add(new ItemBuilder(playerHead).setSkullOwner("Cadet4U").setName("§aCadet Talisman")
+        items.add(new ItemBuilder(cadetTalisman).setSkullOwner("Cadet4U").setName("§aCadet Talisman")
                 .setLore("", "§eAbility: Tallness", "§8Reduces speed because of Cadet's height", "", "§a§lUNCOMMON TALISMAN").toItemStack());
+        items.add(new ItemBuilder(fearHelmet).setSkullOwner("daFear").setName("§5Fear Helmet")
+                .setLore("", "§eAbility: Intimidation", "§8Mobs in an §b8 block radius §8will not target you", "", "§5§lEPIC HELMET").toItemStack());
     }
 }
